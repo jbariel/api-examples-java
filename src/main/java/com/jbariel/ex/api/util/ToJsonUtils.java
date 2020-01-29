@@ -16,20 +16,36 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.jbariel.ex.api.controller;
+package com.jbariel.ex.api.util;
 
-import com.jbariel.ex.api.model.MyReturn;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import spark.Request;
-import spark.Response;
+public class ToJsonUtils {
 
-public class ObjectReturn extends MyObjectController<String> {
+	private static final ObjectMapper mapper = new ObjectMapper();
 
-	public ObjectReturn() {
-		super();
+	public static <O extends Object> String toJson(O object) {
+		String rtn = null;
+		try {
+			rtn = mapper.writeValueAsString(object);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rtn;
 	}
 
-	public String helloWorld(Request req, Response res) {
-		return serialize(new MyReturn<String>().withStatus(200).withMessage("Success").withRtnObject("Hello World"));
+	public static <O extends Object> O fromJson(String toParse, Class<O> objClazz) {
+		O rtn = null;
+		try {
+			rtn = mapper.readValue(toParse, objClazz);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return rtn;
 	}
+
 }

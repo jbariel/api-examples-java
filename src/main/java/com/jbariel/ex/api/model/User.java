@@ -16,20 +16,47 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.jbariel.ex.api.controller;
+package com.jbariel.ex.api.model;
 
-import com.jbariel.ex.api.model.MyReturn;
+public class User extends MyObject {
 
-import spark.Request;
-import spark.Response;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-public class ObjectReturn extends MyObjectController<String> {
-
-	public ObjectReturn() {
+	public User() {
 		super();
 	}
 
-	public String helloWorld(Request req, Response res) {
-		return serialize(new MyReturn<String>().withStatus(200).withMessage("Success").withRtnObject("Hello World"));
+	private String firstName;
+
+	private String lastName;
+
+	public String getFirstName() {
+		return firstName;
 	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public User withFirstName(String firstName) {
+		setFirstName(firstName);
+		return this;
+	}
+
+	public User withLastName(String lastName) {
+		setLastName(lastName);
+		return this;
+	}
+
 }

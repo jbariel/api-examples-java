@@ -39,7 +39,7 @@ public class MyReturn<O extends Object> {
 
 	private O rtnObject;
 
-	private List<O> rtnObjects;
+	private List<O> rtnObjects = new ArrayList<>();
 
 	public int getStatus() {
 		return status;

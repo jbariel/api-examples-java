@@ -19,17 +19,12 @@
 package com.jbariel.ex.api.controller;
 
 import com.jbariel.ex.api.model.MyReturn;
+import com.jbariel.ex.api.util.ToJsonUtils;
 
-import spark.Request;
-import spark.Response;
+public abstract class MyObjectController<O extends Object> {
 
-public class ObjectReturn extends MyObjectController<String> {
-
-	public ObjectReturn() {
-		super();
+	protected String serialize(MyReturn<O> rtn) {
+		return ToJsonUtils.toJson(rtn);
 	}
 
-	public String helloWorld(Request req, Response res) {
-		return serialize(new MyReturn<String>().withStatus(200).withMessage("Success").withRtnObject("Hello World"));
-	}
 }

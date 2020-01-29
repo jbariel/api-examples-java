@@ -16,20 +16,37 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.jbariel.ex.api.controller;
+package com.jbariel.ex.api.model;
 
-import com.jbariel.ex.api.model.MyReturn;
+import java.io.Serializable;
+import java.util.UUID;
 
-import spark.Request;
-import spark.Response;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-public class ObjectReturn extends MyObjectController<String> {
+public abstract class MyObject implements Serializable {
 
-	public ObjectReturn() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MyObject() {
 		super();
 	}
 
-	public String helloWorld(Request req, Response res) {
-		return serialize(new MyReturn<String>().withStatus(200).withMessage("Success").withRtnObject("Hello World"));
+	private UUID uuid = UUID.randomUUID();
+
+	public UUID getUuid() {
+		return this.uuid;
 	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this);
+	}
+
 }

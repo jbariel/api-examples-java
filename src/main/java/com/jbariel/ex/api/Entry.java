@@ -25,6 +25,7 @@ import static spark.Spark.port;
 
 import com.jbariel.ex.api.controller.ObjectReturn;
 import com.jbariel.ex.api.controller.SimpleReturn;
+import com.jbariel.ex.api.controller.UserController;
 
 public class Entry {
 
@@ -35,15 +36,25 @@ public class Entry {
 
 		ObjectReturn obj = new ObjectReturn();
 
+		UserController users = new UserController();
+
 		path("/api", () -> {
-			after("/*", (req, res) -> {
-				res.header("Content-Type", "text/plain; charset=utf-8");
-			});
 			path("/simple", () -> {
 				get("/hello", simple::helloWorld);
+
+				after("/*", (req, res) -> {
+					res.header("Content-Type", "text/plain; charset=utf-8");
+				});
 			});
 			path("/object", () -> {
 				get("/hello", obj::helloWorld);
+
+				get("/users", users::getAll);
+				get("/users/:uuid", users::getByUuid);
+
+				after("/*", (req, res) -> {
+					res.header("Content-Type", "application/json; charset=utf-8");
+				});
 
 			});
 		});
