@@ -18,10 +18,15 @@
  */
 package com.jbariel.ex.api.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.jbariel.ex.api.model.MyReturn;
 import com.jbariel.ex.api.util.ToJsonUtils;
 
 public abstract class MyObjectController<O extends Object> {
+
+	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	protected String serialize(MyReturn<O> rtn) {
 		return ToJsonUtils.toJson(rtn);

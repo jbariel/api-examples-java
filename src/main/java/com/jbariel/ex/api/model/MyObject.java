@@ -22,8 +22,12 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class MyObject implements Serializable {
+
+	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 

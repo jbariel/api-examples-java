@@ -24,6 +24,7 @@ import java.util.UUID;
 
 import com.jbariel.ex.api.model.MyReturn;
 import com.jbariel.ex.api.model.User;
+import com.jbariel.ex.api.model.User.Gender;
 
 import spark.Request;
 import spark.Response;
@@ -35,10 +36,11 @@ public class UserController extends MyObjectController<User> {
 	public UserController() {
 		super();
 
-		userRepo.add(new User().withFirstName("Billy").withLastName("Bob"));
-		userRepo.add(new User().withFirstName("John").withLastName("Travolta"));
-		userRepo.add(new User().withFirstName("Joan").withLastName("Rivers"));
-		userRepo.add(new User().withFirstName("Tom").withLastName("Cruise"));
+		userRepo.add(new User().withFirstName("Billy").withLastName("Bob").withGender(Gender.Male));
+		userRepo.add(new User().withFirstName("John").withLastName("Travolta").withGender(Gender.Male));
+		userRepo.add(new User().withFirstName("Joan").withLastName("Rivers").withGender(Gender.Female));
+		userRepo.add(new User().withFirstName("Tom").withLastName("Cruise").withGender(Gender.Other));
+		userRepo.add(new User().withFirstName("Foo").withLastName("Bar"));
 	}
 
 	public String getAll(Request req, Response res) {
